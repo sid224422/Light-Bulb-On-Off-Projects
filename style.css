@@ -1,3 +1,19 @@
+/* White wire connecting to bulb */
+.wire {
+    position: absolute;
+    left: 50%;
+    top: 0;
+    transform: translateX(-50%);
+    width: 3px;
+    height: 120px;
+    background: #fff;
+    z-index: 1;
+    transition: height 0.3s cubic-bezier(.4,2,.6,1);
+}
+
+.wire.dragging {
+    height: 200px;
+}
 *{
     margin: 0;
     padding: 0;
@@ -16,22 +32,26 @@ body.on{
    background: radial-gradient(#555,#111); 
 }
 
-.wire{
-    position: absolute;
-    left: calc(50% - 2px);
-    bottom: 50%;
-    height: 60vh;
-    width: 4px;
-    background: #000;
-    z-index: 1;
-}
 
-.bulb{
-    position: relative;
+
+
+
+.bulb {
+    position: absolute;
+    left: 50%;
+    top: 120px;
+    transform: translate(-50%, 0);
     width: 80px;
     height: 80px;
     background: transparent;
-    z-index: 2;
+    z-index: 3;
+    transition: filter 0.3s, top 0.3s cubic-bezier(.4,2,.6,1);
+    cursor: grab;
+}
+
+.bulb.dragging {
+    top: 200px;
+    cursor: grabbing;
 }
 
 .bulb i {
@@ -41,6 +61,8 @@ body.on{
     top: 50%;
     left: 50%;
     transform: translate(-50%,-50%) rotate(180deg);
+    filter: brightness(0.7) drop-shadow(0 0 0px #ffd700);
+    transition: color 0.3s, filter 0.3s;
 }
 
 .switch{
@@ -62,8 +84,10 @@ body.on{
     font-size: 1.5rem;
 }
 
+
 .on .bulb i {
     color: #ffd700;
+    filter: brightness(2) drop-shadow(0 0 30px #ffd700) drop-shadow(0 0 60px #fff200);
 }
 
 .on .switch{
